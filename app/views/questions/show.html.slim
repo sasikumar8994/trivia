@@ -1,0 +1,36 @@
+.row
+  .container
+    p#notice = notice
+
+    h3
+      | You are about to answer this question in this category - 
+      = @question.category.name
+    p
+      h4 Question:
+      = @question.name
+    - answered = current_user.submitted_answers.where(question_id: @question.id).first
+    - if answered.present?
+      #callout-type-dl-truncate.bs-callout.bs-callout-info.col-md-12
+        p = "You have already answered and you have got #{answered.score} points"
+        p = " You have answered : #{answered.answer}"
+    - else
+      = simple_form_for @submitted_answer do |f|
+        - if @submitted_answer.errors.any?
+          #error_explanation
+            h2 = "#{pluralize(@submitted_answer.errors.count, "error")} prohibited this submitted_answer from being saved:"
+            ul
+              - @submitted_answer.errors.full_messages.each do |message|
+                li = message
+
+        .field
+          = f.input :user_id, value: current_user.id, as: :hidden
+          = f.input :question_id, as: :hidden
+          = f.input :answer
+        .actions = f.submit 'Submit Answer'
+
+    - if @question.user_id == current_user.id
+      = link_to 'Edit', edit_question_path(@question)
+      '  |
+      = link_to 'Back', questions_path
+    - else
+      = link_to 'Continue', questions_path, class: 'btn btn-success'

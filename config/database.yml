@@ -1,0 +1,8 @@
+development:
+  adapter: postgresql
+  database: trivia_development
+  pool: 5
+  timeout: 5000
+  username: anbu
+  password: password
+  host: localhost

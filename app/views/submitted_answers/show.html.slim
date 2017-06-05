@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong User:
+  = @submitted_answer.user
+p
+  strong Question:
+  = @submitted_answer.question
+p
+  strong Answer:
+  = @submitted_answer.answer
+p
+  strong Score:
+  = @submitted_answer.score
+
+= link_to 'Edit', edit_submitted_answer_path(@submitted_answer)
+'  |
+= link_to 'Back', submitted_answers_path

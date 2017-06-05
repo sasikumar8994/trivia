@@ -1,0 +1,27 @@
+h1 Listing submitted_answers
+
+table
+  thead
+    tr
+      th User
+      th Question
+      th Answer
+      th Score
+      th
+      th
+      th
+
+  tbody
+    - @submitted_answers.each do |submitted_answer|
+      tr
+        td = submitted_answer.user
+        td = submitted_answer.question
+        td = submitted_answer.answer
+        td = submitted_answer.score
+        td = link_to 'Show', submitted_answer
+        td = link_to 'Edit', edit_submitted_answer_path(submitted_answer)
+        td = link_to 'Destroy', submitted_answer, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Submitted answer', new_submitted_answer_path

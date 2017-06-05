@@ -1,0 +1,18 @@
+.row
+  .container
+    h1 Listing questions
+    - @questions.each do |question|
+      #callout-type-dl-truncate.bs-callout.bs-callout-info.col-md-12
+        .col-md-12
+          .col-md-9
+            h4 = question.name
+            p
+              = question.category.try(:name)
+          .col-md-3
+            - if question.user_id == current_user.id
+              = link_to 'Show', question
+              = link_to 'Edit', edit_question_path(question)
+              = link_to 'Destroy', question, data: { confirm: 'Are you sure?' }, method: :delete
+            - else
+              = link_to 'Answer this', question, class: 'btn btn-success'
+

@@ -1,0 +1,52 @@
+.row
+  .container
+    .col-md-12
+      .col-md-3
+        .panel.panel-primary
+          .panel-heading
+            h3 Your Total score
+          .panel-body
+            = current_user.total_score
+      / .col-md-3
+      /   .panel.panel-primary
+      /     .panel-heading
+      /       h3 Longest streright answer
+      /     .panel-body
+      /       = current_user.longest_streak_right
+      / .col-md-3
+      /   .panel.panel-primary
+      /     .panel-heading
+      /       h3 Longest streak wrong answer
+      /     .panel-body
+      /       = current_user.longest_streak_wrong
+    .col-md-12
+      .col-md-6
+        .panel.panel-primary
+          .panel-heading
+            h3 Top 10 Users
+          .panel-body
+            table
+              thead
+                tr
+                  th Name
+                  th Score
+              tbody
+              - User.all.order('total_score DESC').limit(10).each do |user|
+                tr
+                  td = user.email
+                  td = user.total_score
+      .col-md-6
+        .panel.panel-primary
+          .panel-heading
+            h3 Bottom 10 Users
+          .panel-body
+            table
+              thead
+                tr
+                  th Name
+                  th Score
+              tbody
+              - User.all.order('total_score ASC').limit(10).each do |user|
+                tr
+                  td = user.email
+                  td = user.total_score
